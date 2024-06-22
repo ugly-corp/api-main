@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('categories_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->boolean('is_published');
-            $table->foreignId('user_id')->constrained();
-            $table->unsignedBigInteger('views_counter')->default(0);
+            $table->foreignId('category_id')->constrained();;
+            $table->foreignId('post_id')->constrained();;
 
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('categories_posts');
     }
 };
