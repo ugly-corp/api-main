@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
+    public array $names = [
+        'Коты', 'Абстракция', 'Еда', 'Одежда', 'Другое',
+    ];
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->randomElement($this->names),
         ];
     }
 }
