@@ -16,8 +16,13 @@ class PostResource extends JsonResource
     {
         // return parent::toArray($request);
         $fields = $this->only([
-            'id', 'title', 'description', 'views_counter', 'categories', 'user'
+            'id', 'title', 'description', 'views_counter', 'user'
         ]);
-        return [...$fields, 'photo' => $this->photo->getUrl(), 'user' => $this->user->only('id', 'name')];
+        return [
+            ...$fields,
+            'photo' => $this->photo->getUrl(),
+            'categories' => CategoryResource::collection($this->categories),
+            'user' => new UserResource($this->user),
+        ];
     }
 }
