@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\PostCollection;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::with(['categories', 'user'])->get();
+        $posts = Post::with(['categories', 'user'])->get();
+        return new PostCollection($posts);
     }
 
     /**

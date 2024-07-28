@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -84,7 +85,7 @@ class User extends Authenticatable
     /**
      * Get the comments for the blog post.
      */
-    public function comments(): HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }

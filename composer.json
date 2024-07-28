@@ -10,7 +10,9 @@
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.1",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "spatie/laravel-medialibrary": "^11.7",
+      "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",
