@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,5 +23,14 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->unique()->randomElement($this->names),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Category $category) {
+            $category->addMedia(public_path('images/test-category-1.jpg'))
+                ->preservingOriginal()
+                ->toMediaCollection();
+        });
     }
 }
