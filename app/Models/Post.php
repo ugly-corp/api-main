@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
- *
+ * 
  *
  * @method static \Database\Factories\PostFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
@@ -39,6 +39,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViewsCounter($value)
  * @property-read \App\Models\User $user
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
+ * @property-read int|null $media_count
+ * @property-read mixed $photo
+ * @method static Builder|Post withFilter(\Illuminate\Http\Request $request)
  * @mixin \Eloquent
  */
 class Post extends AbstractModel implements HasMedia

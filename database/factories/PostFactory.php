@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,5 +25,14 @@ class PostFactory extends Factory
             'views_counter' => $this->faker->numberBetween(1, 10000),
             'user_id' => User::factory(),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Post $post) {
+            $post->addMedia(public_path('images/test-post-1.jpg'))
+                ->preservingOriginal()
+                ->toMediaCollection();
+        });
     }
 }

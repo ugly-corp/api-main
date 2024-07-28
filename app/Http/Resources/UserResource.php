@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,10 +14,10 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
+//        return parent::toArray($request);
         $fields = $this->only([
-            'id', 'title', 'description', 'views_counter', 'categories', 'user'
+            'id', 'name', 'email'
         ]);
-        return [...$fields, 'photo' => $this->photo->getUrl(), 'user' => $this->user->only('id', 'name')];
+        return [...$fields, 'avatar' => $this->getFirstMedia()->getUrl()];
     }
 }
