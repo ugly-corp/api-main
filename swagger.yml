@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  description: |
+    api ugly dev
+  version: "1.0.0"
+  title: Ugly api
+servers:
+  - url: "http://api.dev.ugly.gallery/api/v1"
+
+tags:
+  - name: post
+    description: Посты
+  - name: user
+    description: Пользователи
+  - name: category
+    description: Категории
+paths:
+  /post:
+    get:
+      tags:
+        - post
+      summary: Получить посты
+      description: Получить посты
+      operationId: getPosts
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostGet"
+  /author:
+    get:
+      tags:
+        - user
+      summary: Получить всех авторов постов
+      description: Получить всех авторов постов
+      operationId: getAuthors
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuthorGet"
+  /category:
+    get:
+      tags:
+        - category
+      summary: Получить все категории
+      description: Получить все категории
+      operationId: getCategories
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryGet"
+components:
+  schemas:
+    PostGet:
+      type: object
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Post"
+        meta:
+          type: object
+    AuthorGet:
+      type: object
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+        meta:
+          type: object
+    CategoryGet:
+      type: object
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Category"
+        meta:
+          type: object
+    Post:
+      type: 'object'
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        views_counter:
+          type: integer
+        is_published:
+          type: boolean
+          default: true
+        photo:
+          type: string
+        user:
+          type: object
+          $ref: "#/components/schemas/User"
+        categories:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Category"
+    User:
+      type: 'object'
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+    Category:
+      type: 'object'
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        photo:
+          type: string
