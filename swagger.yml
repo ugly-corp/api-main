@@ -14,7 +14,69 @@ tags:
     description: Пользователи
   - name: category
     description: Категории
+  - name: auth
+    description: Авторизация
 paths:
+  /login:
+    post:
+      tags:
+        - auth
+      summary: Залогиниться
+      description: Залогиниться
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInputParams'
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Login"
+  /logout:
+    post:
+      security:
+        - Bearer: [ ]
+      tags:
+        - auth
+      summary: Разлогиниться
+      description: Разлогиниться
+      operationId: logout
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Logout"
+  /register:
+    post:
+      tags:
+        - auth
+      summary: Регистрация
+      description: Регистрация
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterInputParams'
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Register"
   /post:
     get:
       tags:
@@ -64,7 +126,54 @@ paths:
                 items:
                   $ref: "#/components/schemas/CategoryGet"
 components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: >-
+        Enter the token with the `Bearer: ` prefix, e.g. "Bearer abcde12345".
   schemas:
+    Login:
+      type: object
+      properties:
+        data:
+          type: "object"
+          properties:
+            user:
+              $ref: "#/components/schemas/User"
+            token:
+              type: string
+    Logout:
+      type: array
+    Register:
+      type: object
+      properties:
+        data:
+          type: "object"
+          properties:
+            user:
+              $ref: "#/components/schemas/User"
+            token:
+              type: string
+    LoginInputParams:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+    RegisterInputParams:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        device_name:
+          type: string
     PostGet:
       type: object
       properties:

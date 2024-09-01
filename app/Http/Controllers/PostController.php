@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\Mobile\StorePostRequest;
+use App\Http\Requests\Mobile\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
 use App\Models\Post;
 

@@ -18,6 +18,6 @@ class UserResource extends JsonResource
         $fields = $this->only([
             'id', 'name', 'email'
         ]);
-        return [...$fields, 'avatar' => $this->getFirstMedia()->getUrl()];
+        return [...$fields, 'avatar' => $this->getFirstMedia()?->getUrl()];
     }
 }
