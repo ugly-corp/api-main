@@ -164,7 +164,7 @@ components:
       properties:
         email:
           type: string
-        name:
+        device_name:
           type: string
         password:
           type: string
