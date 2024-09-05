@@ -5,7 +5,10 @@ info:
   version: "1.0.0"
   title: Ugly api
 servers:
-  - url: "http://api.dev.ugly.gallery/api/v1"
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/NookieNoo/ugly-api/1.0.0
+  - url: "https://api.dev.ugly.gallery/api/v1/mobile"
 
 tags:
   - name: post
@@ -17,7 +20,7 @@ tags:
   - name: auth
     description: Авторизация
 paths:
-  /login:
+  /auth/login:
     post:
       tags:
         - auth
@@ -38,7 +41,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Login"
-  /logout:
+  /auth/logout:
     post:
       security:
         - Bearer: [ ]
@@ -56,7 +59,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Logout"
-  /register:
+  /auth/register:
     post:
       tags:
         - auth
@@ -173,6 +176,8 @@ components:
         password:
           type: string
         device_name:
+          type: string
+        name:
           type: string
     PostGet:
       type: object

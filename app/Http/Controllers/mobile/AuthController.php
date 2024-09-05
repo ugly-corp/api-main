@@ -56,7 +56,7 @@ class AuthController extends ApiController
         }
         event(new UserRegisteredEvent);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken($request->device_name)->plainTextToken;
         return new UserSuccesfullyRegisteredResource(['token' => $token, 'user' => $user]);
     }
 }
