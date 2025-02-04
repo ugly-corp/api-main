@@ -20,7 +20,7 @@ class PostResource extends JsonResource
         ]);
         return [
             ...$fields,
-            'photo' => $this->photo->getUrl(),
+            'photo' => $this->photo?->getUrl(),
             'categories' => CategoryResource::collection($this->categories),
             'user' => new UserResource($this->user),
         ];

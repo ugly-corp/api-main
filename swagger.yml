@@ -38,9 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Login"
+                $ref: "#/components/schemas/Login"
   /auth/logout:
     post:
       security:
@@ -56,9 +54,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Logout"
+                $ref: "#/components/schemas/Logout"
   /auth/register:
     post:
       tags:
@@ -77,11 +73,22 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Register"
+                $ref: "#/components/schemas/Register"
   /post:
     get:
+      parameters:
+        - name: limit
+          in: query
+          description: Размер выборки
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          description: Пропустить n страниц
+          required: false
+          schema:
+            type: integer
       tags:
         - post
       summary: Получить посты
@@ -93,9 +100,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PostGet"
+                $ref: "#/components/schemas/PostGet"
   /author:
     get:
       tags:
@@ -109,9 +114,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/AuthorGet"
+                $ref: "#/components/schemas/AuthorGet"
   /category:
     get:
       tags:
@@ -125,9 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/CategoryGet"
+                $ref: "#/components/schemas/CategoryGet"
 components:
   securitySchemes:
     Bearer:
@@ -187,7 +188,7 @@ components:
           items:
             $ref: "#/components/schemas/Post"
         meta:
-          type: object
+          $ref: "#/components/schemas/PaginationData"
     AuthorGet:
       type: object
       properties:
@@ -223,7 +224,7 @@ components:
         photo:
           type: string
         user:
-          type: object
+#          type: object
           $ref: "#/components/schemas/User"
         categories:
           type: "array"
@@ -249,3 +250,20 @@ components:
           type: string
         photo:
           type: string
+    PaginationData:
+      type: 'object'
+      properties:
+        current_page:
+          type: integer
+        from:
+          type: integer
+        last_page:
+          type: integer
+        per_page:
+          type: integer
+        to:
+          type: integer
+        total:
+          type: integer
+        page:
+          type: integer

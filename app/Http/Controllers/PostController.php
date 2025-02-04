@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Mobile\PostListRequest;
 use App\Http\Requests\Mobile\StorePostRequest;
 use App\Http\Requests\Mobile\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -12,9 +14,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PostListRequest $request)
     {
-        $posts = Post::with(['categories', 'user'])->get();
+        $limit = $request->limit;
+        $offset = $request->offset;
+        $posts = Post::with(['categories', 'user'])->paginate($limit, ['*'], 'page', $offset);
         return new PostCollection($posts);
     }
 
@@ -31,7 +35,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+//        dd($post);
+        return new PostResource($post);
     }
 
     /**
