@@ -43,12 +43,12 @@ Route::prefix('/v1/admin')->group(function (): void {
 //    Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
     Route::prefix('/post')->group(function (): void {
-        Route::get('/{id}', [PostController::class, 'show'])->where('id', '[0-9]+');
+        Route::get('/{post}', [\App\Http\Controllers\Admin\PostController::class, 'show']);
         Route::get('/', [\App\Http\Controllers\Admin\PostController::class, 'index']);
     });
 
     Route::prefix('/category')->group(function (): void {
-        Route::get('/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->where('id', '[0-9]+');
+        Route::get('/{category}', [\App\Http\Controllers\Admin\CategoryController::class, 'show']);
         Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
     });
 

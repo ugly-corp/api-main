@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Mobile\StoreCategoryRequest;
 use App\Http\Requests\Mobile\UpdateCategoryRequest;
 use App\Http\Resources\Admin\CategoryCollection;
+use App\Http\Resources\Admin\CategoryResource;
 use App\Models\Category;
+use App\Models\Post;
 
 class CategoryController extends Controller
 {
@@ -38,9 +40,9 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category): CategoryResource
     {
-        //
+        return new CategoryResource($category);
     }
 
     /**

@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
- * 
+ *
  *
  * @method static \Database\Factories\PostFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
@@ -71,10 +71,10 @@ class Post extends AbstractModel implements HasMedia
     {
         return $query->when($request->query('user_id'), function (Builder $query, string $user_id) {
             $query->where('user_id', '=', $user_id);
+        })->when($request->query('category_id'), function (Builder $query, $categoryId) {
+            $query->join('category_post', 'posts.id', '=', 'category_post.post_id')
+                ->where('category_id', '=', $categoryId);
         });
-//            ->when($request->query('teacher_id'), function (Builder $query, string $teacher_id) {
-//                $query->where('teacher_id', '=', $teacher_id);
-//            });
     }
 
     /**

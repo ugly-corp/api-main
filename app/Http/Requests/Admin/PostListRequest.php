@@ -23,7 +23,8 @@ class PostListRequest extends FormRequest
     {
         return [
             'limit' => 'integer|min:0',
-            'offset' => 'integer|min:0'
+            'offset' => 'integer|min:0',
+            'category_id' => 'nullable|integer|min:0|exists:categories,id'
         ];
     }
 }
