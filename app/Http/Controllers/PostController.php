@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Mobile\PostListRequest;
 use App\Http\Requests\Mobile\StorePostRequest;
-use App\Http\Requests\Mobile\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
