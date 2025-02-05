@@ -12,7 +12,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): CategoryCollection
     {
         $categories = Category::all();
         return new CategoryCollection($categories);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\mobile;
+namespace App\Http\Controllers\Mobile;
 
 use App\Events\UserLogoutEvent;
 use App\Events\UserRegisteredEvent;

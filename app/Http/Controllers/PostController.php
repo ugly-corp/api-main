@@ -14,7 +14,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(PostListRequest $request)
+    public function index(PostListRequest $request): PostCollection
     {
         $limit = $request->limit;
         $offset = $request->offset;
