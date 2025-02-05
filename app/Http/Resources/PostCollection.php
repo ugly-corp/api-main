@@ -10,9 +10,9 @@ class PostCollection extends BaseCollection
     /**
      * Transform the resource into an array.
      *
-     * @return array<string, mixed>
+     * @return \Illuminate\Support\Collection
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request): \Illuminate\Support\Collection
     {
         return parent::toArray($request);
     }

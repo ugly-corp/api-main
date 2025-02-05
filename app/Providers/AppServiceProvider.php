@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Http\Paginators\BasePaginator;
+use App\Http\Resources\Admin\PostCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
 

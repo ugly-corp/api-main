@@ -48,8 +48,8 @@ Route::prefix('/v1/admin')->group(function (): void {
     });
 
     Route::prefix('/category')->group(function (): void {
-        Route::get('/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+');
-        Route::get('/', [CategoryController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->where('id', '[0-9]+');
+        Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
     });
 
     Route::prefix('/user')->group(function (): void {
