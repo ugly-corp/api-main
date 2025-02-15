@@ -101,6 +101,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PostGet"
+  /post/{post_id}/like:
+    post:
+      security:
+        - Bearer: [ ]
+      tags:
+        - post
+      parameters:
+        - name: post_id
+          in: path
+          description: ID поста
+          required: true
+          schema:
+            type: integer
+            format: int64
+      summary: Поставить/снять лайк
+      description: Поставить/снять лайк
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLikeBody'
+      operationId: like
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostLike"
   /author:
     get:
       tags:
@@ -115,6 +144,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthorGet"
+  /user/favourite:
+    get:
+      tags:
+        - user
+      summary: Получить все посты лайкнутые пользователем
+      description: Получить все посты лайкнутые пользователем
+      operationId: getFavouritePosts
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserFavouritePostGet"
   /category:
     get:
       tags:
@@ -189,6 +232,26 @@ components:
             $ref: "#/components/schemas/Post"
         meta:
           $ref: "#/components/schemas/PaginationData"
+    PostLike:
+      type: object
+      properties:
+        success:
+          type: "boolean"
+    UserFavouritePostGet:
+      type: object
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Post"
+        meta:
+          $ref: "#/components/schemas/PaginationData"
+    UserLikeBody:
+      type: object
+      properties:
+        is_liked:
+          type: boolean
+          required: true
     AuthorGet:
       type: object
       properties:

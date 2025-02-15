@@ -15,8 +15,9 @@ class PostController extends Controller
      */
     public function index(PostListRequest $request): PostCollection
     {
-        $limit = $request->limit;
-        $offset = $request->offset;
+        $limit = $request->limit ?? 10;
+        $offset = $request->offset ?? 0;
+
         $posts = Post::with(['categories', 'user'])->withFilter($request)->paginate($limit, ['*'], 'page', $offset);
         return new PostCollection($posts);
     }

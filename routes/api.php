@@ -8,17 +8,23 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix('/v1/mobile')->group(function (): void {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    })->middleware('auth:sanctum');
+    Route::prefix('/user')->group(function (): void {
+        Route::get('/favourite', [UserController::class, 'getFavouritePosts'])->middleware('auth:sanctum');
+
+        Route::get('/', function (Request $request) {
+            return $request->user();
+        })->middleware('auth:sanctum');
+    });
 
     Route::post('/auth/register', [AuthController::class, 'register']);
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
     Route::prefix('/post')->group(function (): void {
+        Route::post('/{post}/like', [PostController::class, 'like'])
+            ->where('id', '[0-9]+')
+            ->middleware('auth:sanctum');
         Route::get('/{id}', [PostController::class, 'show'])->where('id', '[0-9]+');
         Route::get('/', [PostController::class, 'index']);
     });

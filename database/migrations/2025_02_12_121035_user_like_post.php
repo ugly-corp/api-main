@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_post', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained();
+        Schema::create('user_likes', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('post_id')->constrained();
+
+            $table->unique(['user_id', 'post_id']);
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_post');
+        Schema::dropIfExists('user_likes');
     }
 };
